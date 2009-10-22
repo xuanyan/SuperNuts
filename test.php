@@ -1,16 +1,13 @@
 <?php
 
-/**
- * alltosun.com 文件说明
- * ============================================================================
- * 版权所有 (C) 2007-2009 北京共创阳光科技有限公司，并保留所有权利。
- * 网站地址: http://www.alltosun.com
- * ----------------------------------------------------------------------------
- * 许可声明：这是一个开源程序，未经许可不得将本软件的整体或任何部分用于商业用途及再发布。
- * ============================================================================
- * $Author: 宣言 (xuany@alltosun.com) $
- * $Date: 2009-10-22 15:42:24 +0800 $
-*/
+/*
+ * This file is part of the wejello package.
+ *
+ * @copyright (c) 2009 WeJello Project More info http://www.wejello.org
+ * @license http://opensource.org/licenses/gpl-2.0.php The GNU General Public License
+ * @author xuanyan <xuanyan@wejello.org>
+ * @version $Id: db.php 19 2009-06-24 14:59:53Z xuanyan $
+ */
 
 
 require './DB.php';
