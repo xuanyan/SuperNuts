@@ -20,7 +20,7 @@ class DB
     public static function connect()
     {
         $params = func_get_args();
-        
+
         if (count($params) == 1) {
             $params = $params[0];
         }
@@ -64,7 +64,7 @@ interface DBWrapper
     public function exec();
     public function lastInsertId();
     public function getDriver();
-    public function query($sql);
+    public function query();
     public function fetch($query);
 }
 

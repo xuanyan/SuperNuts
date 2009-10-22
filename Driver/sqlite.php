@@ -8,7 +8,7 @@
  * @author xuanyan <xuanyan@wejello.org>
  * @version $Id: db.php 19 2009-06-24 14:59:53Z xuanyan $
  */
- 
+
 class sqliteWrapper extends DBAbstract implements DBWrapper
 {
     private function initialization()
@@ -107,7 +107,7 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
     {
         $param = func_get_args();
         $query = call_user_func_array(array($this, 'query'), $param);
-        
+
         return $query->fetchAll(SQLITE_ASSOC);
     }
 

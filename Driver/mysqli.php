@@ -73,10 +73,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     public function getCol()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
-
         $stmt = call_user_func_array(array($this, 'query'), $param);
 
         $stmt->bind_result($result);
@@ -91,9 +87,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     public function getAll()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $stmt = call_user_func_array(array($this, 'query'), $param);
 
         $result = array();

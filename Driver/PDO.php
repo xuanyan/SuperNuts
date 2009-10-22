@@ -68,9 +68,6 @@ class PDOWrapper extends DBAbstract implements DBWrapper
     public function getCol()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $sth = call_user_func_array(array($this, 'query'), $param);
 
         if ($out = $sth->fetchAll(PDO::FETCH_COLUMN, 0)) {
@@ -83,9 +80,6 @@ class PDOWrapper extends DBAbstract implements DBWrapper
     public function getAll()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $sth = call_user_func_array(array($this, 'query'), $param);
 
         if ($out = $sth->fetchAll(PDO::FETCH_ASSOC)) {
