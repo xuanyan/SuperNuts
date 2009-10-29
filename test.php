@@ -14,9 +14,11 @@ require './DB.php';
 
 // $db = DB::connect('mysql', 'localhost', 'root', 'root', 'wejello');
 
-$db = DB::connect('mysqli', 'localhost', 'root', 'root', 'wejello');
+// $db = DB::connect('mysqli', 'localhost', 'root', 'root', 'wejello');
 
 // $db = DB::connect('pdo', 'mysql:dbname=wejello;host=localhost', 'root', 'root');
+// $db = DB::connect('sqlite', './test.sqlite');
+
 
 echo 1;
 print_r($db->getRow("select * from member where id = ?", 4));
