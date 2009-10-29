@@ -28,7 +28,6 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
     public function query()
     {
         $params = func_get_args();
-
         $sql = array_shift($params);
 
         DB::$sql[] = $sql;

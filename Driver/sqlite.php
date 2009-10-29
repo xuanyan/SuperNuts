@@ -24,7 +24,6 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
     public function query()
     {
         $params = func_get_args();
-
         $sql = array_shift($params);
 
         DB::$sql[] = $sql;
@@ -95,9 +94,9 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
     public function fetch($query, $result_type = DB::ASSOC)
     {
         if ($result_type == DB::ASSOC) {
-            return $query->fetch(SQLITE_ASSOC)
+            return $query->fetch(SQLITE_ASSOC);
         } elseif ($result_type == DB::NUM) {
-            return $query->fetch(SQLITE_NUM)
+            return $query->fetch(SQLITE_NUM);
         }
 
         return $query->fetch(SQLITE_BOTH);
