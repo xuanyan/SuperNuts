@@ -25,10 +25,26 @@ class DB
             $params = $params[0];
         }
 
-        $key = md5(serialize($params));
+        // mabe the param is object, so use var_dump
+        ob_start();
+        var_dump($params);
+        $sp = ob_get_clean();
+        $key = sha1($sp);
+        // $key = md5(serialize($params));
 
         if (!isset(self::$connections[$key])) {
-            $driver = array_shift($params);
+            if (!is_array($params)) {
+                if (!preg_match('/type \((\w+)|object\((\w+)\)/', $sp, $driver)) {
+                    throw new Exception("cant detect the drive auto", 1);
+                } else {
+                    $driver = strtolower(array_pop($driver));
+                    if ($driver == 'sqlitedatabase') {
+                        $driver = 'sqlite';
+                    }
+                }
+            } else {
+                $driver = array_shift($params);
+            }
 
             require_once dirname(__FILE__).'/Driver/'.$driver.'.php';
             $class = $driver.'Wrapper';
@@ -47,6 +63,9 @@ abstract class DBAbstract
     function __construct($config)
     {
         $this->config = $config;
+        if (!is_array($this->config)) {
+            $this->link = $this->config;
+        }
     }
 
     function getDriver()
