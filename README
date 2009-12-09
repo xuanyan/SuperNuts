@@ -1,7 +1,0 @@
-this is a simple database abstraction for php.
-
-it support mysql mysqli PDO SQLiteDatabase now, and will support SQLite3 soon...
-
-how to use it ?
-
-please see some examples in test.php... and more examples are comming soon...
