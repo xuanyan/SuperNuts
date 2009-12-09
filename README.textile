@@ -4,7 +4,7 @@
 
 <h3>how to use it ?</h3>
 
-<h4>database initialization</h4>
+<p>database initialization: </p>
 
 <pre>
 require_once 'DB.php';
