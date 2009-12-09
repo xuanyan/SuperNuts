@@ -4,3 +4,21 @@
 
 <h3>how to use it ?</h3>
 
+<h4>database initialization</h4>
+
+<pre>
+require_once 'DB.php';
+
+// pdo
+$db = DB::connect('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root');
+$db = DB::connect('pdo', array('mysql:dbname=test;host=localhost', 'root', 'root'));
+$db = DB::connect('pdo', new PDO('mysql:host=localhost;dbname=test', 'root', 'root'));
+
+// mysql
+$db = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
+$db = DB::connect('mysql', array('localhost', 'root', 'root', 'test'));
+$link = mysql_connect('localhost', 'root', 'root');
+mysql_select_db('test', $link);
+$db = DB::connect('mysql', $link);
+
+</pre>
