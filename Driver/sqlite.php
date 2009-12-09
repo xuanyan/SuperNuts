@@ -35,6 +35,14 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
             foreach ($params as $key => $val) {
                 $params[$key] = sqlite_escape_string($val);
             }
+            if (preg_match_all('/:(\w+)/i', $sql, $tmp)) {
+                $p = array();
+                foreach ($tmp[1] as $key => $val) {
+                    $p[] = $params[$val];
+                }
+                $params = $p;
+                $sql = str_replace($tmp[0], '?', $sql);
+            }
             $sql = str_replace('?', "'%s'", $sql);
             array_unshift($params, $sql);
             $sql = call_user_func_array('sprintf', $params);

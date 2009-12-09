@@ -31,17 +31,28 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         DB::$sql[] = $sql;
         $this->initialization();
 
-        if (!$stmt = $this->link->prepare($sql)) {
-            throw new Exception("Error sql query:$sql");
-        }
         if (isset($params[0])) {
             if (is_array($params[0])) {
                 $params = $params[0];
             }
+            if (preg_match_all('/:(\w+)/i', $sql, $tmp)) {
+                $p = array();
+                foreach ($tmp[1] as $key => $val) {
+                    $p[] = $params[$val];
+                }
+                $params = $p;
+                $sql = str_replace($tmp[0], '?', $sql);
+            }
+            if (!$stmt = $this->link->prepare($sql)) {
+                throw new Exception("Error sql query:$sql");
+            }
             $s = str_repeat('s', count($params));
             array_unshift($params, $s);
             call_user_func_array(array($stmt, 'bind_param'), $params);
+        } elseif (!$stmt = $this->link->prepare($sql)) {
+            throw new Exception("Error sql query:$sql");
         }
+
         $stmt->execute();
 
         return $stmt;
