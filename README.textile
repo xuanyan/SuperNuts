@@ -7,18 +7,36 @@
 <p>database initialization: </p>
 
 <pre>
+
 require_once 'DB.php';
 
 // pdo
 $db = DB::connect('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root');
 $db = DB::connect('pdo', array('mysql:dbname=test;host=localhost', 'root', 'root'));
-$db = DB::connect('pdo', new PDO('mysql:host=localhost;dbname=test', 'root', 'root'));
+$db = DB::connect(new PDO('mysql:host=localhost;dbname=test', 'root', 'root'));
 
 // mysql
 $db = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
 $db = DB::connect('mysql', array('localhost', 'root', 'root', 'test'));
 $link = mysql_connect('localhost', 'root', 'root');
 mysql_select_db('test', $link);
-$db = DB::connect('mysql', $link);
+$db = DB::connect($link);
+
+// mysqli
+$db = DB::connect('mysqli', 'localhost', 'root', 'root', 'test');
+$db = DB::connect('mysqli', array('localhost', 'root', 'root', 'test'));
+$link = new mysqli('localhost', 'root', 'root', 'test');
+$db = DB::connect($link);
+$link = mysqli_init();
+$link->real_connect('localhost', 'root', 'root', 'test');
+$db = DB::connect($link);
+
+// sqlite
+$db = DB::connect('sqlite', 'test.sqlite');
+$db = DB::connect('sqlite', array('test.sqlite'));
+$link = new SQLiteDatabase('test.sqlite');
+$db = DB::connect($link);
+$link = sqlite_open('test.sqlite');
+$db = DB::connect($link);
 
 </pre>
