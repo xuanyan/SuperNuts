@@ -78,7 +78,7 @@ public function exec();
 public function lastInsertId();
 // get the id of the last inserted row or sequence value
 public function getDriver();
-// get the database driver origin link or object
+// get the origin link or object of the database driver
 public function query();
 // execute a sql and returns a statement object
 public function fetch($query);
