@@ -28,6 +28,14 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
+        if ($sql instanceOf DBQuery) {
+            if ($param = $sql->getParam()) {
+                return $this->query($sql->__toString(), $param);
+            } else {
+                return $this->query($sql->__toString());
+            }
+        }
+
         DB::$sql[] = $sql;
         $this->initialization();
 
@@ -69,9 +77,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     public function getOne()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $stmt = call_user_func_array(array($this, 'query'), $param);
 
         $stmt->bind_result($result);
@@ -132,9 +137,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     public function getRow()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $stmt = call_user_func_array(array($this, 'query'), $param);
 
         return $this->fetch($stmt);

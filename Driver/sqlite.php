@@ -26,8 +26,17 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
+        if ($sql instanceOf DBQuery) {
+            if ($param = $sql->getParam()) {
+                return $this->query($sql->__toString(), $param);
+            } else {
+                return $this->query($sql->__toString());
+            }
+        }
+
         DB::$sql[] = $sql;
         $this->initialization();
+
         if (isset($params[0])) {
             if (is_array($params[0])) {
                 $params = $params[0];
@@ -80,9 +89,6 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
     public function getOne()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $query = call_user_func_array(array($this, 'query'), $param);
 
         return $query->fetchSingle();
@@ -91,9 +97,6 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
     public function getRow()
     {
         $param = func_get_args();
-        if (stripos($param[0], 'limit') === false) {
-            $param[0] .= ' LIMIT 1';
-        }
         $query = call_user_func_array(array($this, 'query'), $param);
 
         return $query->fetch(SQLITE_ASSOC);
