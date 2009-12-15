@@ -28,14 +28,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        if ($sql instanceOf DBQuery) {
-            if ($param = $sql->getParam()) {
-                return $this->query($sql->__toString(), $param);
-            } else {
-                return $this->query($sql->__toString());
-            }
-        }
-
         DB::$sql[] = $sql;
         $this->initialization();
 
