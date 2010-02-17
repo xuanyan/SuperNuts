@@ -68,7 +68,51 @@ abstract class DBAbstract
         }
     }
 
-    function getDriver()
+    public function getCol()
+    {
+        $param = func_get_args();
+        $query = call_user_func_array(array($this, 'query'), $param);
+
+        $rs = array();
+        while ($rt = $this->fetch($query, DB::NUM)) {
+            $rs[] = $rt[0];
+        }
+
+        return $rs;
+    }
+
+    public function getOne()
+    {
+        $param = func_get_args();
+        $query = call_user_func_array(array($this, 'query'), $param);
+        $rs = $this->fetch($query, DB::NUM);
+
+        return $rs[0];
+    }
+
+    public function getAll()
+    {
+        $param = func_get_args();
+        $query = call_user_func_array(array($this,'query'), $param);
+
+        $rs = array();
+        while ($rt = $this->fetch($query, DB::ASSOC)) {
+            $rs[] = $rt;
+        }
+
+        return $rs;
+    }
+
+    public function getRow()
+    {
+        $param = func_get_args();
+        $query = call_user_func_array(array($this, 'query'), $param);
+        $rs = $this->fetch($query, DB::ASSOC);
+
+        return $rs === false ? array() : $rs;
+    }
+
+    public function getDriver()
     {
         return $this->initialization();
     }

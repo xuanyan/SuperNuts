@@ -126,14 +126,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         return array_merge($out, array_values($out));
     }
 
-    public function getRow()
-    {
-        $param = func_get_args();
-        $stmt = call_user_func_array(array($this, 'query'), $param);
-
-        return $this->fetch($stmt);
-    }
-
     public function lastInsertId()
     {
         $this->initialization();

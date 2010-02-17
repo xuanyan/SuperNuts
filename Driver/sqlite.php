@@ -65,33 +65,12 @@ class sqliteWrapper extends DBAbstract implements DBWrapper
         return $this->link->changes();
     }
 
-    public function getCol()
-    {
-        $param = func_get_args();
-        $query = call_user_func_array(array($this, 'query'), $param);
-
-        $rs = array();
-        while ($rt = $query->fetch(SQLITE_NUM)) {
-            $rs[] = $rt[0];
-        }
-
-        return $rs;
-    }
-
     public function getOne()
     {
         $param = func_get_args();
         $query = call_user_func_array(array($this, 'query'), $param);
 
         return $query->fetchSingle();
-    }
-
-    public function getRow()
-    {
-        $param = func_get_args();
-        $query = call_user_func_array(array($this, 'query'), $param);
-
-        return $query->fetch(SQLITE_ASSOC);
     }
 
     public function fetch($query, $result_type = DB::ASSOC)

@@ -1,6 +1,6 @@
 <h3>this is a simple database abstraction for php.</h3>
 
-<p>it support mysql mysqli PDO SQLiteDatabase now, and will support SQLite3 in future...</p>
+<p>it support mysql mysqli PDO SQLiteDatabase AND SQLite3 now, and will support more in future...</p>
 
 <h3>how to use it ?</h3>
 
@@ -38,6 +38,12 @@ $db = DB::connect('sqlite', array('test.sqlite'));
 $link = new SQLiteDatabase('test.sqlite');
 $db = DB::connect($link);
 $link = sqlite_open('test.sqlite');
+$db = DB::connect($link);
+
+// sqlite3
+$db = DB::connect('sqlite3', 'test.sqlite3');
+$db = DB::connect('sqlite3', array('test.sqlite3'));
+$link = new SQLite3('test.sqlite3');
 $db = DB::connect($link);
 
 </pre>
