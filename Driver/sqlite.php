@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the wejello package.
+ * This file is part of the Geek-Zoo Projects.
  *
- * @copyright (c) 2009 WeJello Project More info http://www.wejello.org
+ * @copyright (c) 2010 Geek-Zoo Projects More info http://www.geek-zoo.com
  * @license http://opensource.org/licenses/gpl-2.0.php The GNU General Public License
- * @author xuanyan <xuanyan@wejello.org>
- * @version $Id: db.php 19 2009-06-24 14:59:53Z xuanyan $
+ * @author xuanyan <xuanyan@geek-zoo.com>
+ *
  */
 
 class sqliteWrapper extends DBAbstract implements DBWrapper

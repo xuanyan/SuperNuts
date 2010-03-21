@@ -1,16 +1,13 @@
 <?php
 
-/**
- * alltosun.com 文件说明
- * ============================================================================
- * 版权所有 (C) 2007-2010 北京共创阳光科技有限公司，并保留所有权利。
- * 网站地址: http://www.alltosun.com
- * ----------------------------------------------------------------------------
- * 许可声明：这是一个开源程序，未经许可不得将本软件的整体或任何部分用于商业用途及再发布。
- * ============================================================================
- * $Author: 宣言 (xuany@alltosun.com) $
- * $Date: 2010-02-17 19:22:12 +0800 $
-*/
+/*
+ * This file is part of the Geek-Zoo Projects.
+ *
+ * @copyright (c) 2010 Geek-Zoo Projects More info http://www.geek-zoo.com
+ * @license http://opensource.org/licenses/gpl-2.0.php The GNU General Public License
+ * @author xuanyan <xuanyan@geek-zoo.com>
+ *
+ */
 
 class sqlite3Wrapper extends DBAbstract implements DBWrapper
 {
