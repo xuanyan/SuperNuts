@@ -16,9 +16,9 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
         if ($this->link === null) {
             $dbname = array_pop($this->config);
             $this->link = call_user_func_array('mysql_connect', $this->config);
-            $version = mysql_get_server_info($this->link);
-            mysql_unbuffered_query('SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary', $this->link);
-            mysql_unbuffered_query("SET sql_mode=''", $this->link);
+            //$version = mysql_get_server_info($this->link);
+            //mysql_unbuffered_query('SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary', $this->link);
+            //mysql_unbuffered_query("SET sql_mode=''", $this->link);
             mysql_select_db($dbname, $this->link);
         }
 
