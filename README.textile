@@ -79,8 +79,11 @@ $result = $db->getAll($sql);
 // if there are variables in sql, you can do it like this, and don't need to process the variables. : )
 $sql = "SELECT * FROM test_table WHERE id = ? AND name = ?";
 $result = $db->getAll($sql, $id, $name);
+
 // you can allso use:
+$sql = "SELECT * FROM test_table WHERE id = ? AND name = ?";
 $result = $db->getAll($sql, array($id, $name));
+
 // it allso support:
 $sql = "SELECT * FROM test_table WHERE id = :id AND name = :name";
 $result = $db->getAll($sql, array('name'=>$name, 'id'=>$id));
