@@ -48,7 +48,27 @@ $db = DB::connect($link);
 
 </pre>
 
-<p>to execute sql: </p>
+<p>use the $instance variable</p>
+
+<pre>
+
+require_once 'DB.php';
+
+// set the DB::$instance
+DB::$instance = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
+
+//in some function, u can use it like this:
+
+test();
+
+function test() {
+    $sql = "DELETE FROM test WHERE id = ?";
+    DB::$instance->exec($sql, 1);
+}
+
+</pre>
+
+<p>how to execute sql: </p>
 
 <pre>
 

@@ -13,6 +13,7 @@ class DB
 {
     public static $sql = array();
     private static $connections = array();
+    public static $instance = null;
     const NUM = 0;
     const ASSOC = 1;
     const BOTH = 2;
