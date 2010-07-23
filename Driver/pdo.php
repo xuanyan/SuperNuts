@@ -16,7 +16,6 @@ class PDOWrapper extends DBAbstract implements DBWrapper
     {
         if (!($this->link instanceof PDO)) {
             $this->link = call_user_func_array(array(new ReflectionClass('PDO'), 'newInstance'), $this->config);
-            $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
         return $this->link;

@@ -16,8 +16,6 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     {
         if (!($this->link instanceof mysqli)) {
             $this->link = call_user_func_array(array(new ReflectionClass('mysqli'), 'newInstance'), $this->config);
-            //$this->link->query('SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary');
-            //$this->link->query("SET sql_mode=''");
         }
 
         return $this->link;

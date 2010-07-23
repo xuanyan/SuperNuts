@@ -11,6 +11,7 @@
 
 class sqlite3Wrapper extends DBAbstract implements DBWrapper
 {
+    // lazy loading
     private function initialization()
     {
         if (!($this->link instanceof SQLite3)) {
