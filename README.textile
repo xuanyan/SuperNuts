@@ -115,7 +115,7 @@ public function fetch($query);
 
 </pre>
 
-<p>some code may be used after initialization</p>
+<p>i removed the code of initialization in class, the class just did the connecting work, so some code may be used after initialization.</p>
 
 <pre>
 
