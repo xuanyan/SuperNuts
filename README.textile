@@ -123,12 +123,7 @@ public function fetch($query);
 
 $db->getDriver()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//mysql
-
-$db->exec('SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary');
-$db->exec("SET sql_mode=''", $this->link);
-
-//mysqli
+//mysqli or mysql
 
 $db->exec('SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary');
 $db->exec("SET sql_mode=''");
