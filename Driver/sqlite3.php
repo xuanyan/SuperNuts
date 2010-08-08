@@ -17,6 +17,9 @@ class sqlite3Wrapper extends DBAbstract implements DBWrapper
         if (!($this->link instanceof SQLite3)) {
             $this->link = call_user_func_array(
                 array(new ReflectionClass('SQLite3'), 'newInstance'), $this->config);
+            foreach ($this->initialization as $val) {
+                $this->link->query($val);
+            }
         }
 
         return $this->link;

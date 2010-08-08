@@ -18,6 +18,9 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
             $dbname = array_pop($this->config);
             $this->link = call_user_func_array('mysql_connect', $this->config);
             mysql_select_db($dbname, $this->link);
+            foreach ($this->initialization as $val) {
+                mysql_unbuffered_query($val, $this->link);
+            }
         }
 
         return $this->link;

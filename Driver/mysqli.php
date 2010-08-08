@@ -16,6 +16,9 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
     {
         if (!($this->link instanceof mysqli)) {
             $this->link = call_user_func_array(array(new ReflectionClass('mysqli'), 'newInstance'), $this->config);
+            foreach ($this->initialization as $val) {
+                $this->link->query($val);
+            }
         }
 
         return $this->link;

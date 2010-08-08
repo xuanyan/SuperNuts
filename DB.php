@@ -60,6 +60,7 @@ abstract class DBAbstract
 {
     protected $config = array();
     protected $link = null;
+    public $initialization = array();
 
     function __construct($config)
     {
