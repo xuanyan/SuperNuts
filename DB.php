@@ -36,7 +36,7 @@ class DB
         if (!isset(self::$connections[$key])) {
             if (!is_array($params)) {
                 if (!preg_match('/type \((\w+)|object\((\w+)\)/', $sp, $driver)) {
-                    throw new Exception("cant detect the drive auto", 1);
+                    throw new Exception("cant auto detect the database driver", 1);
                 } else {
                     $driver = strtolower(array_pop($driver));
                     if ($driver == 'sqlitedatabase') {
