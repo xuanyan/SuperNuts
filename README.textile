@@ -1,8 +1,10 @@
-<h3>this is a simple database abstraction for php.</h3>
+<h3>this project contains a simple database abstraction and a simple cache abstraction for php.</h3>
 
-<p>it support mysql mysqli PDO SQLiteDatabase AND SQLite3 now, and will support more in future...</p>
+<p>the database abstraction supports mysql mysqli PDO SQLiteDatabase AND SQLite3 now, and will support more in future...</p>
 
-<h3>how to use it ?</h3>
+<p>and the cache abstraction only supports file now, and will support more in future...</p>
+
+<h3>how to use them ?</h3>
 
 <p>database initialization: </p>
 
@@ -48,27 +50,48 @@ $db = Database::connect($link);
 
 </pre>
 
+<p>cache initialization: </p>
+
+<pre>
+
+require_once 'Cache.php';
+
+$cache = Cache::connect('file', './tmp');
+$cache = Cache::connect(array('file', './tmp'));
+$cache = Cache::connect('./tmp');
+
+</pre>
+
 <p>use the $instance variable</p>
 
 <pre>
 
+require_once 'Cache.php';
 require_once 'Database.php';
 
 // set the Database::$instance
 Database::$instance = Database::connect('mysql', 'localhost', 'root', 'root', 'test');
 
-//in some function, u can use it like this:
+// set the Cache::$instance
+Cache::$instance = Cache::connect('file', './tmp');
 
-test();
+//in some function, u can use them like this:
+
+print_r(test());
 
 function test() {
-    $sql = "DELETE FROM test WHERE id = ?";
-    Database::$instance->exec($sql, 1);
+    $sql = "SELECT * FROM test WHERE id = ?";
+    if (!$data = Cache::$instance->get('id_1')) {
+      $data = Database::$instance->getRow($sql, 1);
+      Cache::$instance->set('id_1', $data);
+    }
+
+    return $data;
 }
 
 </pre>
 
-<p>how to execute sql: </p>
+<p>database examples: </p>
 
 <pre>
 
@@ -90,7 +113,7 @@ $result = $db->getAll($sql, array('name'=>$name, 'id'=>$id));
 
 </pre>
 
-<p>methods: </p>
+<p>database methods: </p>
 
 <pre>
 
