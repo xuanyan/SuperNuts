@@ -29,8 +29,14 @@ class Cache
         $key = sha1($sp);
         // $key = md5(serialize($params));
         if (!isset(self::$connections[$key])) {
+            if (!is_array($params)) {
+                if (is_string($params)) {
+                    $driver = 'file';
+                }
+            } else {
+                $driver = array_shift($params);
+            }
 
-            $driver = array_shift($params);
             require_once dirname(__FILE__).'/Driver/'.$driver.'.php';
             $class = $driver.'Wrapper';
             self::$connections[$key] = new $class($params);

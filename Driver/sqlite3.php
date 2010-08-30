@@ -9,7 +9,7 @@
  *
  */
 
-class sqlite3Wrapper extends DBAbstract implements DBWrapper
+class sqlite3Wrapper extends DatabaseAbstract implements DatabaseWrapper
 {
     // lazy loading
     private function initialization()
@@ -30,7 +30,7 @@ class sqlite3Wrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        DB::$sql[] = $sql;
+        Database::$sql[] = $sql;
         $this->initialization();
 
         if (!isset($params[0])) {
@@ -67,11 +67,11 @@ class sqlite3Wrapper extends DBAbstract implements DBWrapper
         return $this->link->changes();
     }
 
-    public function fetch($query, $result_type = DB::ASSOC)
+    public function fetch($query, $result_type = Database::ASSOC)
     {
-        if ($result_type == DB::ASSOC) {
+        if ($result_type == Database::ASSOC) {
             return $query->fetchArray(SQLITE3_ASSOC);
-        } elseif ($result_type == DB::NUM) {
+        } elseif ($result_type == Database::NUM) {
             return $query->fetchArray(SQLITE3_NUM);
         }
 

@@ -9,7 +9,7 @@
  *
  */
 
-class mysqlWrapper extends DBAbstract implements DBWrapper
+class mysqlWrapper extends DatabaseAbstract implements DatabaseWrapper
 {
     // lazy loading
     private function initialization()
@@ -31,7 +31,7 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        DB::$sql[] = $sql;
+        Database::$sql[] = $sql;
         $this->initialization();
 
         if (isset($params[0])) {
@@ -70,11 +70,11 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
         return mysql_affected_rows($this->link);
     }
 
-    public function fetch($query, $result_type = DB::ASSOC)
+    public function fetch($query, $result_type = Database::ASSOC)
     {
-        if ($result_type == DB::ASSOC) {
+        if ($result_type == Database::ASSOC) {
             return mysql_fetch_array($query, MYSQL_ASSOC);
-        } elseif ($result_type == DB::NUM) {
+        } elseif ($result_type == Database::NUM) {
             return mysql_fetch_array($query, MYSQL_NUM);
         }
 
@@ -85,7 +85,7 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
     {
         $param = func_get_args();
         $query = call_user_func_array(array($this, 'query'), $param);
-        $rs = $this->fetch($query, DB::NUM);
+        $rs = $this->fetch($query, Database::NUM);
         mysql_free_result($query);
 
         return $rs[0];
@@ -95,7 +95,7 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
     {
         $param = func_get_args();
         $query = call_user_func_array(array($this, 'query'), $param);
-        $rs = $this->fetch($query, DB::ASSOC);
+        $rs = $this->fetch($query, Database::ASSOC);
         mysql_free_result($query);
 
         return $rs === false ? array() : $rs;
@@ -107,7 +107,7 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
         $query = call_user_func_array(array($this,'query'), $param);
 
         $rs = array();
-        while ($rt = $this->fetch($query, DB::NUM)) {
+        while ($rt = $this->fetch($query, Database::NUM)) {
             $rs[] = $rt[0];
         }
         mysql_free_result($query);
@@ -121,7 +121,7 @@ class mysqlWrapper extends DBAbstract implements DBWrapper
         $query = call_user_func_array(array($this,'query'), $param);
 
         $rs = array();
-        while ($rt = $this->fetch($query, DB::ASSOC)) {
+        while ($rt = $this->fetch($query, Database::ASSOC)) {
             $rs[] = $rt;
         }
         mysql_free_result($query);

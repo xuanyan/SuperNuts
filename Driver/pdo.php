@@ -9,7 +9,7 @@
  *
  */
 
-class PDOWrapper extends DBAbstract implements DBWrapper
+class PDOWrapper extends DatabaseAbstract implements DatabaseWrapper
 {
     // lazy loading
     private function initialization()
@@ -29,7 +29,7 @@ class PDOWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        DB::$sql[] = $sql;
+        Database::$sql[] = $sql;
         $this->initialization();
 
         if (!isset($params[0])) {
@@ -89,11 +89,11 @@ class PDOWrapper extends DBAbstract implements DBWrapper
         return array();
     }
 
-    public function fetch($sth, $result_type = DB::ASSOC)
+    public function fetch($sth, $result_type = Database::ASSOC)
     {
-        if ($result_type == DB::ASSOC) {
+        if ($result_type == Database::ASSOC) {
             return $sth->fetch(PDO::FETCH_ASSOC);
-        } elseif ($result_type == DB::NUM) {
+        } elseif ($result_type == Database::NUM) {
             return $sth->fetch(PDO::FETCH_NUM);
         }
 

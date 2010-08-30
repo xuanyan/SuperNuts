@@ -8,43 +8,43 @@
 
 <pre>
 
-require_once 'DB.php';
+require_once 'Database.php';
 
 // pdo
-$db = DB::connect('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root');
-$db = DB::connect(array('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root'));
+$db = Database::connect('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root');
+$db = Database::connect(array('pdo', 'mysql:dbname=test;host=localhost', 'root', 'root'));
 $link = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
-$db = DB::connect($link);
+$db = Database::connect($link);
 
 // mysql
-$db = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
-$db = DB::connect(array('mysql', 'localhost', 'root', 'root', 'test'));
+$db = Database::connect('mysql', 'localhost', 'root', 'root', 'test');
+$db = Database::connect(array('mysql', 'localhost', 'root', 'root', 'test'));
 $link = mysql_connect('localhost', 'root', 'root');
 mysql_select_db('test', $link);
-$db = DB::connect($link);
+$db = Database::connect($link);
 
 // mysqli
-$db = DB::connect('mysqli', 'localhost', 'root', 'root', 'test');
-$db = DB::connect(array('mysqli', 'localhost', 'root', 'root', 'test'));
+$db = Database::connect('mysqli', 'localhost', 'root', 'root', 'test');
+$db = Database::connect(array('mysqli', 'localhost', 'root', 'root', 'test'));
 $link = new mysqli('localhost', 'root', 'root', 'test');
-$db = DB::connect($link);
+$db = Database::connect($link);
 $link = mysqli_init();
 $link->real_connect('localhost', 'root', 'root', 'test');
-$db = DB::connect($link);
+$db = Database::connect($link);
 
 // sqlite
-$db = DB::connect('sqlite', 'test.sqlite');
-$db = DB::connect(array('sqlite', 'test.sqlite'));
+$db = Database::connect('sqlite', 'test.sqlite');
+$db = Database::connect(array('sqlite', 'test.sqlite'));
 $link = new SQLiteDatabase('test.sqlite');
-$db = DB::connect($link);
+$db = Database::connect($link);
 $link = sqlite_open('test.sqlite');
-$db = DB::connect($link);
+$db = Database::connect($link);
 
 // sqlite3
-$db = DB::connect('sqlite3', 'test.sqlite3');
-$db = DB::connect(array('sqlite3', 'test.sqlite3'));
+$db = Database::connect('sqlite3', 'test.sqlite3');
+$db = Database::connect(array('sqlite3', 'test.sqlite3'));
 $link = new SQLite3('test.sqlite3');
-$db = DB::connect($link);
+$db = Database::connect($link);
 
 </pre>
 
@@ -52,10 +52,10 @@ $db = DB::connect($link);
 
 <pre>
 
-require_once 'DB.php';
+require_once 'Database.php';
 
-// set the DB::$instance
-DB::$instance = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
+// set the Database::$instance
+Database::$instance = Database::connect('mysql', 'localhost', 'root', 'root', 'test');
 
 //in some function, u can use it like this:
 
@@ -63,7 +63,7 @@ test();
 
 function test() {
     $sql = "DELETE FROM test WHERE id = ?";
-    DB::$instance->exec($sql, 1);
+    Database::$instance->exec($sql, 1);
 }
 
 </pre>
@@ -120,7 +120,7 @@ public function fetch($query);
 <pre>
 
 //mysql
-$db = DB::connect('mysql', 'localhost', 'root', 'root', 'test');
+$db = Database::connect('mysql', 'localhost', 'root', 'root', 'test');
 $db->initialization = array(
   'SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary',
   "SET sql_mode=''"

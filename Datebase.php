@@ -9,7 +9,7 @@
  *
  */
 
-class DB
+class Database
 {
     public static $sql = array();
     private static $connections = array();
@@ -56,7 +56,7 @@ class DB
     }
 }
 
-abstract class DBAbstract
+abstract class DatabaseAbstract
 {
     protected $config = array();
     protected $link = null;
@@ -120,7 +120,7 @@ abstract class DBAbstract
     }
 }
 
-interface DBWrapper
+interface DatabaseWrapper
 {
     public function getRow();
     public function getCol();

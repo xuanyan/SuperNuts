@@ -9,7 +9,7 @@
  *
  */
 
-class mysqliWrapper extends DBAbstract implements DBWrapper
+class mysqliWrapper extends DatabaseAbstract implements DatabaseWrapper
 {
     // lazy loading
     private function initialization()
@@ -29,7 +29,7 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        DB::$sql[] = $sql;
+        Database::$sql[] = $sql;
         $this->initialization();
 
         if (isset($params[0])) {
@@ -105,7 +105,7 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
         return $result;
     }
 
-    public function fetch($stmt, $result_type = DB::ASSOC)
+    public function fetch($stmt, $result_type = Database::ASSOC)
     {
         $field = $stmt->result_metadata()->fetch_fields();
         $out = array();
@@ -118,9 +118,9 @@ class mysqliWrapper extends DBAbstract implements DBWrapper
             return array();
         }
 
-        if ($result_type == DB::ASSOC) {
+        if ($result_type == Database::ASSOC) {
             return $out;
-        } elseif ($result_type == DB::NUM) {
+        } elseif ($result_type == Database::NUM) {
             return array_values($out);
         }
 
