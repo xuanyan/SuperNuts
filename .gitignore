@@ -1,4 +1,1 @@
-*.kpf
-*.sqlite
-test.php
-untitled.textile
+tmp/*
