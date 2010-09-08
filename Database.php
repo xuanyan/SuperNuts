@@ -47,7 +47,7 @@ class Database
                 $driver = array_shift($params);
             }
 
-            require_once dirname(__FILE__).'/Driver/'.$driver.'.php';
+            require_once dirname(__FILE__).'/Driver/Database/'.$driver.'.php';
             $class = $driver.'Wrapper';
             self::$connections[$key] = new $class($params);
         }
