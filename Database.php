@@ -14,6 +14,7 @@ class Database
     public static $sql = array();
     private static $connections = array();
     public static $instance = null;
+    public static $debug = false;
     const NUM = 0;
     const ASSOC = 1;
     const BOTH = 2;

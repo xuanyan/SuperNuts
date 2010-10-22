@@ -30,7 +30,8 @@ class sqliteWrapper extends DatabaseAbstract implements DatabaseWrapper
         $params = func_get_args();
         $sql = array_shift($params);
 
-        Database::$sql[] = $sql;
+        Database::$debug && Database::$sql[] = $sql;
+
         $this->initialization();
 
         if (isset($params[0])) {
