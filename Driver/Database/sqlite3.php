@@ -28,6 +28,7 @@ class sqlite3Wrapper extends DatabaseAbstract implements DatabaseWrapper
     public function query()
     {
         $params = func_get_args();
+        
         $sql = array_shift($params);
 
         Database::$debug && Database::$sql[] = $sql;
