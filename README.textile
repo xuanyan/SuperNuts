@@ -1,3 +1,16 @@
+<h3>Summarization :</h3>
+<p>this project contains 2 main class : Cache and Database. and in goodies folder, there are some usefull class must be used with the main class.</p>
+<p>more info and the documentation plz check "here":http://github.com/xuanyan/SuperNuts/wiki .</p>
+
+
+
+
+
+
+
+
+
+
 <h3>this project contains a simple database abstraction and a simple cache abstraction for php.</h3>
 
 <p>the database abstraction supports mysql mysqli PDO SQLiteDatabase AND SQLite3 now, and will support more in future...</p>
