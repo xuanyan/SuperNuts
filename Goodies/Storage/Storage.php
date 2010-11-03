@@ -35,7 +35,7 @@ class Storage
             return false;
         }
         if (isset($file_name)) {
-            $dir = dirname($dir);
+            $dir = dirname($file_name);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
             }
