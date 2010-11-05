@@ -1,3 +1,4 @@
-<h3>Summarization :</h3>
-<p>This project contains 2 main class : 'Cache' and 'Database'. In goodies folder, there are some useful class must be used with the main class.</p>
-<p>more info and the documentation plz check "here":http://github.com/xuanyan/SuperNuts/wiki .</p>
+h3. Summarization :
+
+This project contains 2 main class : 'Cache' and 'Database'. In goodies folder, there are some useful class must be used with the main class.
+more info and the documentation plz check "here":http://github.com/xuanyan/SuperNuts/wiki .
