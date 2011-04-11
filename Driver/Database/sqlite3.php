@@ -31,6 +31,9 @@ class sqlite3Wrapper extends DatabaseAbstract implements DatabaseWrapper
         
         $sql = array_shift($params);
 
+        if (Database::$replace) {
+            strtr($sql, Database::$replace)
+        }
         Database::$debug && Database::$sql[] = $sql;
 
         $this->initialization();
