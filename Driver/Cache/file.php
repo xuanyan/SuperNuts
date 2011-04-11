@@ -120,7 +120,7 @@ EOT;
     public function set($key, $value, $expire = 3600)
     {
         if ($this->ns) {
-            $filename = $this->path.'/'.md5($this->ns).'/'.md5($key).'.cache';
+            $filename = $this->path.'/'.md5($this->ns).'/'.md5($key).'.php';
             $this->ns = '';
         } else {
             $filename = $this->path.'/'.md5($key).'.php';
