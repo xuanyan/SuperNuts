@@ -15,7 +15,7 @@ class Database
     private static $connections = array();
     public static $instance = null;
     public static $debug = false;
-    public static $replace = array();
+
     const NUM = 0;
     const ASSOC = 1;
     const BOTH = 2;
