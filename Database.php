@@ -78,7 +78,7 @@ abstract class DatabaseAbstract
         $query = call_user_func_array(array($this, 'query'), $param);
 
         $rs = array();
-        while ($rt = $this->fetch($query, DB::NUM)) {
+        while ($rt = $this->fetch($query, Database::NUM)) {
             $rs[] = $rt[0];
         }
 
@@ -89,7 +89,7 @@ abstract class DatabaseAbstract
     {
         $param = func_get_args();
         $query = call_user_func_array(array($this, 'query'), $param);
-        $rs = $this->fetch($query, DB::NUM);
+        $rs = $this->fetch($query, Database::NUM);
 
         return $rs[0];
     }
