@@ -15,10 +15,60 @@ class Database
     private static $connections = array();
     public static $instance = null;
     public static $debug = false;
+    private $driver = null;
 
     const NUM = 0;
     const ASSOC = 1;
     const BOTH = 2;
+
+    function __call($fun, $params = array())
+    {
+        return call_user_func_array(array($this->driver, $fun), $params);
+    }
+
+    function __construct()
+    {
+        $params = func_get_args();
+
+        if (count($params) == 1) {
+            $params = $params[0];
+        }
+
+        list($key, $sp) = self::getParamHash($params);
+
+        $this->driver = self::getDriver($params, $sp);
+    }
+
+    private static function getDriver($params, $sp)
+    {
+        if (is_array($params)) {
+            $driver = array_shift($params);
+        } elseif (preg_match('/type \((\w+)|object\((\w+)\)/', $sp, $driver)) {
+            $driver = strtolower(array_pop($driver));
+            if ($driver == 'sqlitedatabase') {
+                $driver = 'sqlite';
+            }
+        } else {
+            throw new Exception("cant auto detect the database driver");
+        }
+
+        require_once dirname(__FILE__).'/Driver/Database/'.$driver.'.php';
+        $class = $driver.'Wrapper';
+
+        return new $class($params);
+    }
+
+    private static function getParamHash($params)
+    {
+        // mabe the param is object, so use var_dump
+        ob_start();
+        var_dump($params);
+        $sp = ob_get_clean();
+        $key = sha1($sp);
+        // $key = md5(serialize($params));
+
+        return array($key, $sp);
+    }
 
     public static function connect()
     {
@@ -28,30 +78,10 @@ class Database
             $params = $params[0];
         }
 
-        // mabe the param is object, so use var_dump
-        ob_start();
-        var_dump($params);
-        $sp = ob_get_clean();
-        $key = sha1($sp);
-        // $key = md5(serialize($params));
+        list($key, $sp) = self::getParamHash($params);
 
         if (!isset(self::$connections[$key])) {
-            if (!is_array($params)) {
-                if (!preg_match('/type \((\w+)|object\((\w+)\)/', $sp, $driver)) {
-                    throw new Exception("cant auto detect the database driver", 1);
-                } else {
-                    $driver = strtolower(array_pop($driver));
-                    if ($driver == 'sqlitedatabase') {
-                        $driver = 'sqlite';
-                    }
-                }
-            } else {
-                $driver = array_shift($params);
-            }
-
-            require_once dirname(__FILE__).'/Driver/Database/'.$driver.'.php';
-            $class = $driver.'Wrapper';
-            self::$connections[$key] = new $class($params);
+            self::$connections[$key] = self::getDriver($params, $sp);
         }
 
         return self::$connections[$key];
