@@ -1,4 +1,1 @@
-h3. Summarization :
-
-This project contains 2 main class : 'Cache' and 'Database'. On goodies branch, there are some useful class must be used with the main class.
-more info and the documentation plz check "here":http://github.com/xuanyan/SuperNuts/wiki .
+it was moved, plz check "here":https://github.com/xuanyan/Database
